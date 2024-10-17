@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Employee</h1>
+
+    <form id="employeeForm">
+        <div class="form-group">
+            <label for="employeeName">First Name</label>
+            <input type="text" id="employeeFirstName" name="employeeFirstName" required>
+        </div>
+        <div class="form-group">
+            <label for="employeeName">Last Name</label>
+            <input type="text" id="employeeLastName" name="employeeLastName" required>
+        </div>
+        <div class="form-group">
+            <label for="employeeAddress1">Address1</label>
+            <input type="text" id="employeeAddress1" name="employeeAddress1" required>
+        </div>
+        <div class="form-group">
+            <label for="employeeAddress2">Address2</label>
+            <input type="text" id="employeeAddress2" name="employeeAddress2">
+        </div>
+        <div class="form-group">
+            <label for="employeeCity">City</label>
+            <input type="text" id="employeeCity" name="employeeCity" required>
+        </div>
+        <div class="form-group">
+            <label for="employeeState">State</label>
+            <input type="text" id="employeeState" name="employeeState" required>
+        </div>
+        <div class="form-group">
+            <label for="employeeZipcode">Zipcode</label>
+            <input type="text" id="employeeZipcode" name="employeeZipcode" required>
+        </div>
+        <div class="form-group">
+            <label for="employeeSSN">SSN</label>
+            <input type="text" id="employeeSSN" name="employeeSSN">
+        </div>
+        <div class="form-group">
+            <label for="employeeWitholdings">Witholdings</label>
+            <input type="text" id="employeeWitholdings" name="employeeWitholdings">
+        </div>
+        <div class="form-group">
+            <label for="employeeSalary">Salary Per Month</label>
+            <input type="text" id="employeeSalary" name="employeeSalary" required>
+        </div>
+        <button type="submit">Save Employee</button>
+        <button onclick="Back_Main()">Back to Main Menu</button>
+    </form>
+
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById('employeeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            
+            // Get the form data
+            const employeeData = {
+                id: Date.now(),
+                first_name: document.getElementById('employeeFirstName').value,
+                last_name: document.getElementById('employeeLastName').value,
+                address1: document.getElementById('employeeAddress1').value,
+                address2: document.getElementById('employeeAddress2').value,
+                city: document.getElementById('employeeCity').value,
+                state: document.getElementById('employeeState').value,
+                zipcode: document.getElementById('employeeZipcode').value,
+                ssn: document.getElementById('employeeSSN').value,
+                witholdings: document.getElementById('employeeWitholdings').value,
+                salary: document.getElementById('employeeSalary').value,
+                payment_status: false,
+
+            };
+
+            // Send the form data to the backend to save the JSON file
+            fetch('/add_employee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(employeeData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Employee added successfully!');
+                document.getElementById('employeeForm').reset(); // Clear the form
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        function Back_Main() {
+            window.location.href = 'index.html';
+            // Placeholder: add navigation or AJAX call here
+        }
+    </script>
+
+</body>
+</html>

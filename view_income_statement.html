@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Statement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        h2{
+            padding: 10px 150px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 150px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Income Statement</h1>
+
+    <!-- Sales Table -->
+    <h2>Sales</h2>
+    <table id="salesTable">
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Sales</strong></td>
+            <td id="Sales"></td>
+        </tr>
+        <tr>
+            <td><strong>COGS</strong></td>
+            <td id="COGS"></td>
+        </tr>
+        <tr>
+            <td><strong>Gross Profit</strong></td>
+            <td id="GrossProfit"></td>
+        </tr>
+    </table>
+
+    <!-- Expenses Table -->
+    <h2>Expenses</h2>
+    <table id="expensesTable">
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Payroll</strong></td>
+            <td id="Payroll"></td>
+        </tr>
+        <tr>
+            <td><strong>Payroll Withholding</strong></td>
+            <td id="PayrollWithholding"></td>
+        </tr>
+        <tr>
+            <td><strong>Bills</strong></td>
+            <td id="Bills"></td>
+        </tr>
+        <tr>
+            <td><strong>Annual Expenses</strong></td>
+            <td id="AnnualExpenses"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Expenses</strong></td>
+            <td id="TotalExpenses"></td>
+        </tr>
+    </table>
+
+    <!-- Other Table -->
+    <h2></h2>
+    <table id="otherTable">
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Other Income</strong></td>
+            <td id="OtherIncome"></td>
+        </tr>
+        <tr>
+            <td><strong>Operating Income</strong></td>
+            <td id="OperatingIncome"></td>
+        </tr>
+        <tr>
+            <td><strong>Income Taxes</strong></td>
+            <td id="IncomeTaxes"></td>
+        </tr>
+        <tr>
+            <td><strong>Net Income</strong></td>
+            <td id="NetIncome"></td>
+        </tr>
+    </table>
+
+    <div class="btn-container">
+        <button onclick="backToMain()">Back to Main Menu</button>
+    </div>
+
+    <script>
+        // Fetch income statement data and populate the tables
+        fetch('/get_income_statement')
+            .then(response => response.json())
+            .then(data => {
+                // Populate the sales table
+                document.getElementById('Sales').innerText = `$${data.sales.sales.toLocaleString()}`;
+                document.getElementById('COGS').innerText = `$${data.sales.cogs.toLocaleString()}`;
+                document.getElementById('GrossProfit').innerText = `$${data.sales.gross_profit.toLocaleString()}`;
+
+                // Populate the expenses table
+                document.getElementById('Payroll').innerText = `$${data.expenses.payroll.toLocaleString()}`;
+                document.getElementById('PayrollWithholding').innerText = `$${data.expenses.payroll_withholding.toLocaleString()}`;
+                document.getElementById('Bills').innerText = `$${data.expenses.bills.toLocaleString()}`;
+                document.getElementById('AnnualExpenses').innerText = `$${data.expenses.annual_expenses.toLocaleString()}`;
+                document.getElementById('TotalExpenses').innerText = `$${data.expenses.total_expenses.toLocaleString()}`;
+
+                // Populate the other table
+                document.getElementById('OtherIncome').innerText = `$${data.other.other_income.toLocaleString()}`;
+                document.getElementById('OperatingIncome').innerText = `$${data.other.operating_income.toLocaleString()}`;
+                document.getElementById('IncomeTaxes').innerText = `$${data.other.income_taxes.toLocaleString()}`;
+                document.getElementById('NetIncome').innerText = `$${data.other.net_income.toLocaleString()}`;
+            })
+            .catch(error => console.error('Error loading income statement data:', error));
+
+        // Back to main menu function
+        function backToMain() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

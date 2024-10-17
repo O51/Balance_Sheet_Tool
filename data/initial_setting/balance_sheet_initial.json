@@ -1,0 +1,26 @@
+{
+    "assets": {
+        "cash": 200000,
+        "account_receivable": 0,
+        "inventory": 0,
+        "total_current_assets": 200000,
+        "land_building": 0,
+        "equipment": 0,
+        "furniture_fixure": 0,
+        "total_fixed_assets": 0,
+        "total_assets": 200000
+    },
+    "liabilities": {
+        "account_payable": 0,
+        "notes_payable": 0,
+        "accruals": 0,
+        "total_current_liabilities": 0,
+        "mortage": 0,
+        "total_long_term_debt": 0,
+        "total_liabilities": 0
+    },
+    "net_worth": {
+        "net_worth": 200000,
+        "liabilities_networth": 200000
+    }
+}

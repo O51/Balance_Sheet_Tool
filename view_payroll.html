@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 150px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Payroll Information</h1>
+
+    <table id="payrollTable">
+        <tr>
+            <th>Salary</th>
+            <th>Bounce</th>
+            <th>Federal Tax Withold</th>
+            <th>State Tax Withold</th>
+            <th>Social Security Tax</th>
+            <th>Midcare Tax</th>
+            <th>Amount Paid</th>
+        </tr>
+    </table>
+    <button onclick="Back_Main()">Back to Main Menu</button>
+    <script>
+        fetch('/get_payrolls')
+            .then(response => response.json())
+            .then(data => {
+                let table = document.getElementById('payrollTable');
+
+                data.forEach(payroll => {
+                    let row = table.insertRow();
+                    row.innerHTML = `
+                        <td>${payroll.salary}</td>
+                        <td>${payroll.bounce}</td>
+                        <td>${payroll.fed_tax}</td>
+                        <td>${payroll.state_tax}</td>
+                        <td>${payroll.security_tax}</td>
+                        <td>${payroll.midcare_tax}</td>
+                        <td>${payroll.total_paid}</td>
+                    `;
+                });
+            })
+            .catch(error => console.error('Error loading payroll data:', error));
+
+        function Back_Main(){
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

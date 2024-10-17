@@ -1,0 +1,37 @@
+[
+  {
+    "rate": 0.10,
+    "lowerBound": 0,
+    "upperBound": 11600
+  },
+  {
+    "rate": 0.12,
+    "lowerBound": 11601,
+    "upperBound": 47150
+  },
+  {
+    "rate": 0.22,
+    "lowerBound": 47151,
+    "upperBound": 100525
+  },
+  {
+    "rate": 0.24,
+    "lowerBound": 100526,
+    "upperBound": 191950
+  },
+  {
+    "rate": 0.32,
+    "lowerBound": 191951,
+    "upperBound": 243725
+  },
+  {
+    "rate": 0.35,
+    "lowerBound": 243726,
+    "upperBound": 609350
+  },
+  {
+    "rate": 0.37,
+    "lowerBound": 609351,
+    "upperBound": 1000000000000
+  }
+]

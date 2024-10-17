@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: green;
+            color: white;
+            padding: 2vw;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 5vh;
+        }
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 5vh;
+        }
+        button {
+            padding: 1.5vw 3vw;
+            margin: 10px;
+            font-size: 1.2vw;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            flex: 0 1 45%; /* Makes buttons 2 columns */
+            box-sizing: border-box;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Menu Title with Green Rectangle -->
+    <div class="header">
+        <h1>Main Menu</h1>
+    </div>
+
+    <div class="menu">
+        <!-- View and Add Employees -->
+        <button onclick="viewEmployees()">View Employees</button>
+        <button onclick="addEmployee()">Add Employee</button>
+
+        <!-- View and Add Customers -->
+        <button onclick="viewCustomers()">View Customers</button>
+        <button onclick="addCustomer()">Add Customer</button>
+
+        <!-- View and Add Vendors -->
+        <button onclick="viewVendors()">View Vendors</button>
+        <button onclick="addVendor()">Add Vendor</button>
+
+        <!-- Pay Employee (example of an action) -->
+        <button onclick="payEmployee()">Pay Employee</button>
+        <!-- Add more buttons for other functionalities if needed -->
+        <button onclick="viewPayRoll()">PayRoll</button>
+        <button onclick="viewInventory()">Inventory</button>
+        <button onclick="CreateInvoice()">Create Invoice</button>
+        <button onclick="ViewInvoice()">Invoice History</button>
+        <button onclick="CreatePO()">Create PO</button>
+        <button onclick="ViewPO()">View PO</button>
+        <button onclick="ViewBalanceSheet()">Balance Sheet</button>
+        <button onclick="ViewIncomeStatement()">Income Statement</button>
+    </div>
+
+    <script>
+        // Functions for employees
+        function viewEmployees() {
+            window.location.href = 'view_employee.html';
+            // Placeholder: add navigation or AJAX call here
+        }
+
+        function addEmployee() {
+            window.location.href = 'add_employee.html';
+            // Placeholder: add navigation or form submission here
+        }
+
+        // Functions for customers
+        function viewCustomers() {
+            window.location.href = 'view_customer.html';
+            // Placeholder
+        }
+
+        function addCustomer() {
+            window.location.href = 'add_customer.html';
+            // Placeholder
+        }
+
+        // Functions for vendors
+        function viewVendors() {
+            window.location.href = 'view_vendor.html';
+            // Placeholder
+        }
+
+        function addVendor() {
+            window.location.href = 'add_vendor.html';
+            // Placeholder
+        }
+
+        
+        function viewPayRoll(){
+            window.location.href = 'view_payroll.html'
+        }
+
+        function ViewBalanceSheet(){
+            window.location.href = 'view_balance_sheet.html';
+        }
+
+        function ViewIncomeStatement(){
+            window.location.href = 'view_income_statement.html';
+        }
+
+        function payEmployee(){
+            window.location.href = 'pay_employee.html';
+        }
+
+        function CreateInvoice(){
+            window.location.href = 'make_invoice.html';
+        }
+
+        function ViewInvoice()
+        {
+            window.location.href = 'view_invoice.html';
+        }
+
+        function CreatePO() {
+            window.location.href = 'make_PO.html';
+        }
+
+        function ViewPO() {
+            window.location.href = 'view_PO.html';
+        }
+
+        function viewInventory() {
+            window.location.href = 'view_inventory.html';
+        }
+    </script>
+
+</body>
+</html>

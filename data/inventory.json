@@ -1,0 +1,53 @@
+{
+    "Tires": {
+        "price_unit": 0.01,
+        "quantity": 0,
+        "value": 0,
+        "re_order": "v"
+    },
+    "Cab Extending Mixer Body": {
+        "price_unit": 0.05,
+        "quantity": 0,
+        "value": 0,
+        "re_order": ""
+    },
+    "Axles": {
+        "price_unit": 0.05,
+        "quantity": 0,
+        "value": 0,
+        "re_order": "v"
+    },
+    "Rims": {
+        "price_unit": 0.1,
+        "quantity": 200000.0,
+        "value": 20000.0,
+        "re_order": "v"
+    },
+    "Screw Box": {
+        "price_unit": 0.01,
+        "quantity": 0,
+        "value": 0,
+        "re_order": ""
+    },
+    "Labor": {
+        "price_unit": 0.1,
+        "quantity": 0,
+        "value": 0,
+        "re_order": ""
+    },
+    "Windshield": {
+        "price_unit": 0.1,
+        "quantity": 0,
+        "value": 0,
+        "re_order": ""
+    },
+    "Box": {
+        "price_unit": 0.05,
+        "quantity": 0,
+        "value": 0,
+        "re_order": ""
+    },
+    "total_value": 20000.0,
+    "cog_unit": 0.57,
+    "completed_unit": 80000.0
+}

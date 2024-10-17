@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1728682198998,
+        "first_name": "John",
+        "last_name": "Smith",
+        "address1": "123 front st",
+        "address2": "",
+        "city": "San Francisco",
+        "state": "CA",
+        "zipcode": "12345",
+        "ssn": "",
+        "witholdings": "0",
+        "salary": "12500",
+        "payment_status": true
+    }
+]

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 150px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Balance Sheet</h1>
+
+    <table id="balanceSheetTable">
+        <!-- Assets -->
+        <tr>
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><strong>Cash</strong></td>
+            <td id="Cash"></td>
+        </tr>
+        <tr>
+            <td><strong>Accounts Receivable</strong></td>
+            <td id="AccountReceivable"></td>
+        </tr>
+        <tr>
+            <td><strong>Inventory</strong></td>
+            <td id="Inventory"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Current Assets</strong></td>
+            <td id="TotalCurrentAssets"></td>
+        </tr>
+        <tr>
+            <td><strong>Land & Buildings</strong></td>
+            <td id="LandBuildings"></td>
+        </tr>
+        <tr>
+            <td><strong>Equipment</strong></td>
+            <td id="Equipment"></td>
+        </tr>
+        <tr>
+            <td><strong>Furniture & Fixtures</strong></td>
+            <td id="FurnitureAndFixures"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Fixed Assets</strong></td>
+            <td id="TotalFixedAssets"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Assets</strong></td>
+            <td id="TotalAssets"></td>
+        </tr>
+        <!-- Liabilities -->
+        <tr>
+            <td><strong>Accounts Payable</strong></td>
+            <td id="AccountPayable"></td>
+        </tr>
+        <tr>
+            <td><strong>Notes Payable</strong></td>
+            <td id="NotesPayable"></td>
+        </tr>
+        <tr>
+            <td><strong>Accruals</strong></td>
+            <td id="Accruals"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Current Liabilities</strong></td>
+            <td id="TotalCurrentLiabilities"></td>
+        </tr>
+        <tr>
+            <td><strong>Mortgage</strong></td>
+            <td id="Mortage"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Long-Term Debt</strong></td>
+            <td id="TotalLongTermDebt"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Liabilities</strong></td>
+            <td id="TotalLiabilities"></td>
+        </tr>
+
+        <tr>
+            <td><strong>Net Worth</strong></td>
+            <td id="NetWorth"></td>
+        </tr>
+        <tr>
+            <td><strong>Total Liabilities & Networth</strong></td>
+            <td id="liabilities_networth"></td>
+        </tr>
+    </table>
+
+    <div class="btn-container">
+        <button onclick="backToMain()">Back to Main Menu</button>
+    </div>
+    <div class="btn-container">
+        <button onclick="Month_Settle()">Settle for this month</button>
+    </div>
+    <script>
+        // Fetch balance sheet data and populate the table
+        fetch('/get_balance_sheet')
+            .then(response => response.json())
+            .then(data => {
+                // Populate the assets section
+                document.getElementById('Cash').innerText = `$${data.assets.cash.toLocaleString()}`;
+                document.getElementById('AccountReceivable').innerText = `$${data.assets.account_receivable.toLocaleString()}`;
+                document.getElementById('Inventory').innerText = `$${data.assets.inventory.toLocaleString()}`;
+                document.getElementById('TotalCurrentAssets').innerText = `$${data.assets.total_current_assets.toLocaleString()}`;
+
+                document.getElementById('LandBuildings').innerText = `$${data.assets.land_building.toLocaleString()}`;
+                document.getElementById('Equipment').innerText = `$${data.assets.equipment.toLocaleString()}`;
+                document.getElementById('FurnitureAndFixures').innerText = `$${data.assets.furniture_fixure.toLocaleString()}`;
+                document.getElementById('TotalFixedAssets').innerText = `$${data.assets.total_fixed_assets.toLocaleString()}`;
+                document.getElementById('TotalAssets').innerText = `$${data.assets.total_assets.toLocaleString()}`;
+
+                // Populate the liabilities section
+                document.getElementById('AccountPayable').innerText = `$${data.liabilities.account_payable.toLocaleString()}`;
+                document.getElementById('NotesPayable').innerText = `$${data.liabilities.notes_payable.toLocaleString()}`;
+                document.getElementById('Accruals').innerText = `$${data.liabilities.accruals.toLocaleString()}`;
+                document.getElementById('TotalCurrentLiabilities').innerText = `$${data.liabilities.total_current_liabilities.toLocaleString()}`;
+
+                document.getElementById('Mortage').innerText = `$${data.liabilities.mortage.toLocaleString()}`;
+                document.getElementById('TotalLongTermDebt').innerText = `$${data.liabilities.total_long_term_debt.toLocaleString()}`;
+                document.getElementById('TotalLiabilities').innerText = `$${data.liabilities.total_liabilities.toLocaleString()}`;
+
+                document.getElementById('NetWorth').innerText = `$${data.net_worth.net_worth.toLocaleString()}`;
+                document.getElementById('liabilities_networth').innerText = `$${data.net_worth.liabilities_networth.toLocaleString()}`;
+            })
+            .catch(error => console.error('Error loading balance sheet data:', error));
+
+        // Back to main menu function
+        function backToMain() {
+            window.location.href = 'index.html';
+        }
+
+        function Month_Settle() {
+            if (confirm("Are you sure you want to settle for this month?")) {
+                fetch(`/settle_balance_sheet`, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    location.reload(); 
+                })
+                .catch(error => console.error('Error settling this month:', error));
+            }
+        }
+    </script>
+
+</body>
+</html>

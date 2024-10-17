@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pay Employee</h1>
+
+    <table id="employeeTable">
+        <tr>
+            <th>Select</th>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Salary Per Month</th>
+        </tr>
+        <!-- Employee rows will be inserted here by JavaScript -->
+    </table>
+
+    <div class="btn-container">
+        <button onclick="paySelectedEmployee()">Pay Selected Employee</button>
+    </div>
+    <div class="btn-container">
+        <button onclick="backToMain()">Back to Main Menu</button>
+    </div>
+
+    <script>
+        // Fetch employee data from the server
+        fetch('/get_employees')
+            .then(response => response.json())
+            .then(data => {
+                let table = document.getElementById('employeeTable');
+
+                data.forEach(employee => {
+                        let row = table.insertRow();
+                        row.innerHTML = `
+                        <td><input type="checkbox" value="${employee.id}" class="employeeCheckbox"></td>
+                        <td>${employee.id}</td>
+                        <td>${employee.first_name}</td>
+                        <td>${employee.last_name}</td>
+                        <td>$${employee.salary.toLocaleString()}</td>
+                    `;
+                    
+                    
+                });
+            })
+            .catch(error => console.error('Error loading employee data:', error));
+
+        // Function to pay the selected employee based on salary
+        function paySelectedEmployee() {
+            const checkboxes = document.querySelectorAll('.employeeCheckbox:checked');
+
+            if (checkboxes.length === 0) {
+                alert("Please select an employee to pay.");
+                return;
+            }
+
+            checkboxes.forEach(checkbox => {
+                const employeeId = checkbox.value;
+
+                // Send payment request to the server
+                fetch(`/pay_employee/${employeeId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    // Optionally refresh the employee table or balance sheet here
+                    location.reload(); 
+                })
+                .catch(error => console.error('Error paying employee:', error));
+            });
+        }
+
+        function backToMain() {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+</body>
+</html>

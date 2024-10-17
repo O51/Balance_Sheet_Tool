@@ -1,0 +1,20 @@
+{
+    "sales": {
+        "sales": 50000.0,
+        "cogs": 11399.999999999998,
+        "gross_profit": 38600.0
+    },
+    "expenses": {
+        "payroll": 12500.0,
+        "payroll_withholding": 0.0,
+        "bills": 0,
+        "annual_expenses": 0,
+        "total_expenses": 0
+    },
+    "other": {
+        "other_income": 0,
+        "operating_income": 0,
+        "income_taxes": 0,
+        "net_income": 23025.0
+    }
+}

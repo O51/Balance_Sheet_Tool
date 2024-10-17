@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Purchase Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Purchase Order</h1>
+
+    <form id="POForm">
+        <div class="form-group">
+            <label for="CompanyName">Company Name</label>
+            <select id="vendorSelect" name="vendor"></select>
+        </div>
+        <div class="form-group">
+            <label for="PONum">Number of units</label>
+            <input type="number" id="PO_num" name="PONum" required>
+        </div>
+        <button id="submit_PO">create PO</button>
+        <button onclick="Back_Main()">Back to Main Menu</button>
+    </form>
+
+    <script>
+        // JavaScript to handle form submission
+        fetch('/get_vendors')
+            .then(response => response.json())
+            .then(data => {
+                    const customerSelect = document.getElementById('vendorSelect');
+                    data.forEach(vendor => {
+                        // console.log(customer);
+                        const option = document.createElement('option');
+                        option.value = vendor.id;
+                        option.textContent = vendor.company_name +'_'+ vendor.part;
+                        customerSelect.appendChild(option);
+                    });
+                    })
+            .catch(error => console.error('Error loading vendor data:', error));
+
+        document.getElementById('submit_PO').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            
+            // Get the form data
+            const cur_time = Date.now()
+            const today = new Date(Date.now())
+            const POData = {
+                date: today.toDateString(),
+                company_id: document.getElementById('vendorSelect').value,
+                quantity: document.getElementById('PO_num').value,
+
+            };
+
+            // Send the form data to the backend to save the JSON file
+            fetch('/add_PO', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(POData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('purchase order added successfully!');
+                // document.getElementById('vendorForm').reset(); // Clear the form
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        function Back_Main() {
+            window.location.href = 'index.html';
+            // Placeholder: add navigation or AJAX call here
+        }
+    </script>
+
+</body>
+</html>

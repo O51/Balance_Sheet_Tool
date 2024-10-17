@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vendor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Vendor</h1>
+
+    <form id="vendorForm">
+        <div class="form-group">
+            <label for="vendorCompanyName">Company Name</label>
+            <input type="text" id="vendorCompanyName" name="vendorCompanyName" required>
+        </div>
+        <div class="form-group">
+            <label for="vendorPart">Part</label>
+            <input type="text" id="vendorPart" name="vendorPart" required>
+        </div>
+        <div class="form-group">
+            <label for="vendorPrice">Price/Unit</label>
+            <input type="number" step=0.00001 id="vendorPrice" name="vendorPrice" required>
+        </div>
+        <div class="form-group">
+            <label for="vendorAddress1">Address1</label>
+            <input type="text" id="vendorAddress1" name="vendorAddress1" >
+        </div>
+        <div class="form-group">
+            <label for="vendorAddress2">Address2</label>
+            <input type="text" id="vendorAddress2" name="vendorAddress2">
+        </div>
+        <div class="form-group">
+            <label for="vendorCity">City</label>
+            <input type="text" id="vendorCity" name="vendorCity" >
+        </div>
+        <div class="form-group">
+            <label for="vendorState">State</label>
+            <input type="text" id="vendorState" name="vendorState" >
+        </div>
+        <div class="form-group">
+            <label for="vendorZipcode">Zipcode</label>
+            <input type="text" id="vendorZipcode" name="vendorZipcode" >
+        </div>
+        <button type="submit">Save Vendor</button>
+        <button onclick="Back_Main()">Back to Main Menu</button>
+    </form>
+
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById('vendorForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            
+            // Get the form data
+            const vendorData = {
+                id: Date.now(),
+                company_name: document.getElementById('vendorCompanyName').value,
+                part: document.getElementById('vendorPart').value,
+                price_unit: document.getElementById('vendorPrice').value,
+                address1: document.getElementById('vendorAddress1').value,
+                address2: document.getElementById('vendorAddress2').value,
+                city: document.getElementById('vendorCity').value,
+                state: document.getElementById('vendorState').value,
+                zipcode: document.getElementById('vendorZipcode').value
+
+            };
+
+            // Send the form data to the backend to save the JSON file
+            fetch('/add_vendor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(vendorData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Vendor added successfully!');
+                document.getElementById('vendorForm').reset(); // Clear the form
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        function Back_Main() {
+            window.location.href = 'index.html';
+            // Placeholder: add navigation or AJAX call here
+        }
+    </script>
+
+</body>
+</html>

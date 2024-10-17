@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: green;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add New Customer</h1>
+
+    <form id="customerForm">
+        <div class="form-group">
+            <label for="customerCompanyName">Company Name</label>
+            <input type="text" id="customerCompanyName" name="customerCompanyName" required>
+        </div>
+        <div class="form-group">
+            <label for="customerName">First Name</label>
+            <input type="text" id="customerFirstName" name="customerFirstName">
+        </div>
+        <div class="form-group">
+            <label for="customerName">Last Name</label>
+            <input type="text" id="customerLastName" name="customerLastName">
+        </div>
+        <div class="form-group">
+            <label for="customerAddress1">Address1</label>
+            <input type="text" id="customerAddress1" name="customerAddress1" >
+        </div>
+        <div class="form-group">
+            <label for="customerAddress2">Address2</label>
+            <input type="text" id="customerAddress2" name="customerAddress2">
+        </div>
+        <div class="form-group">
+            <label for="customerCity">City</label>
+            <input type="text" id="customerCity" name="customerCity" >
+        </div>
+        <div class="form-group">
+            <label for="customerState">State</label>
+            <input type="text" id="customerState" name="customerState" >
+        </div>
+        <div class="form-group">
+            <label for="customerZipcode">Zipcode</label>
+            <input type="text" id="customerZipcode" name="customerZipcode" >
+        </div>
+        <div class="form-group">
+            <label for="customerPrice">Price</label>
+            <input type="number" step=0.00001 id="customerPrice" name="customerPrice" required>
+        </div>
+        <button type="submit">Save Customer</button>
+        <button onclick="Back_Main()">Back to Main Menu</button>
+    </form>
+
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById('customerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            
+            // Get the form data
+            const customerData = {
+                id: Date.now(),
+                company_name: document.getElementById('customerCompanyName').value,
+                first_name: document.getElementById('customerFirstName').value,
+                last_name: document.getElementById('customerLastName').value,
+                address1: document.getElementById('customerAddress1').value,
+                address2: document.getElementById('customerAddress2').value,
+                city: document.getElementById('customerCity').value,
+                state: document.getElementById('customerState').value,
+                zipcode: document.getElementById('customerZipcode').value,
+                price: document.getElementById('customerPrice').value,
+
+            };
+
+            // Send the form data to the backend to save the JSON file
+            fetch('/add_customer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(customerData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Customer added successfully!');
+                document.getElementById('customerForm').reset(); // Clear the form
+            })
+            .catch(error => console.error('Error:', error));
+        });
+        function Back_Main() {
+            window.location.href = 'index.html';
+            // Placeholder: add navigation or AJAX call here
+        }
+    </script>
+
+</body>
+</html>

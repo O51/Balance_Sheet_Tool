@@ -1,0 +1,11 @@
+[
+    {
+        "salary": 12500.0,
+        "bounce": 0.0,
+        "fed_tax": 1500.0,
+        "state_tax": 618.75,
+        "security_tax": 775.0,
+        "midcare_tax": 181.25,
+        "total_paid": 15575.0
+    }
+]
